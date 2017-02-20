@@ -1,7 +1,5 @@
 ﻿using System;
 using VendingMachine.Entities;
-using VendingMachine.Interfaces;
-using VendingMachine.Services;
 
 namespace VendingMachine
 {
@@ -9,9 +7,10 @@ namespace VendingMachine
     {
         public static void Main(string[] args)
         {
-            var vm = new VendingMachine();
+            var vm = new VendingSession();
+            
 
-            foreach(Item i in vm.GetItems())
+            foreach(Product i in vm.GetProducts())
             {
                 Console.WriteLine(string.Format("Name: {0} Price: {1}", i.Name, i.Price));
             }

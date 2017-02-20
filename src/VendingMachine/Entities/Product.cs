@@ -1,6 +1,6 @@
 namespace VendingMachine.Entities
 {
-    public class Item
+    public class Product
     {
         public string Name { get; set; }
         public decimal Price { get; set; }        

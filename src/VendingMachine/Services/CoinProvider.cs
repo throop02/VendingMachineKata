@@ -40,7 +40,7 @@ namespace VendingMachine.Services
             {
                 Weight = 6,
                 Size = 6,
-                Denomination = 0.10m,
+                Denomination = 0.25m,
                 Name = "Quarter"
             });
 

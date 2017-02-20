@@ -17,7 +17,8 @@ namespace VendingMachine.Services
                 Weight = 2,
                 Size = 2,
                 Denomination = 0.01m,
-                Name = "Penny"
+                Name = "Penny",
+                RejectCoin = true
             });
 
             Coins.Add(new Coin() 

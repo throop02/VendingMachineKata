@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using VendingMachine;
 using System.Linq;
 using VendingMachine.Entities;
@@ -23,23 +22,23 @@ namespace Tests
             var products = _VendingSession.GetProducts();
 
             Assert.Equal(products.Count, 3);
-            Assert.Equal(products.Any(x => x.Name == "Cola" && x.Price == 1.00m), true);
-            Assert.Equal(products.Any(x => x.Name == "Chips" && x.Price == 0.50m), true);
-            Assert.Equal(products.Any(x => x.Name == "Candy" && x.Price == 0.65m), true);
+            Assert.Equal(true, products.Any(x => x.Name == "Cola" && x.Price == 1.00m));
+            Assert.Equal(true, products.Any(x => x.Name == "Chips" && x.Price == 0.50m));
+            Assert.Equal(true, products.Any(x => x.Name == "Candy" && x.Price == 0.65m));
         }
 
         [Fact]
         public void VendingMachineContainsCoinDefinitions()
         {
             var coins = _VendingSession.GetCoins();
-            Assert.Equal(coins.Count > 0, true);
+            Assert.Equal(true, coins.Count > 0);
         }
 
         [Fact]
-        public void WhenCoinsAreInsertedTotalAmountIncreases()
+        public void WhenValidCoinsAreInsertedTotalAmountIncreases()
         {
             var vs = new VendingSession();
-            var coins = vs.GetCoins();
+            var coins = vs.GetCoins().Where(x => x.RejectCoin == false);
 
             foreach(Coin c in coins)
             {
@@ -48,6 +47,20 @@ namespace Tests
 
             Assert.Equal(coins.Sum(x => x.Denomination), vs.TotalInserted);
 
+        }
+
+        [Fact]
+        public void PennyIsRejected()
+        {
+            var vs = new VendingSession();
+            var penny = vs.GetCoins().Single(x => x.Name == "Penny" && x.RejectCoin == true);
+            vs.InsertCoin(penny.Size, penny.Weight);
+
+            //Amount did not increase
+            Assert.Equal(0.00m, vs.TotalInserted);
+
+            //Penny got added to reject collection
+            Assert.Equal(penny.Denomination, vs.CoinsRejected.Sum(x => x.Denomination));
         }
 
     }

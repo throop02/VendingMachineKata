@@ -14,14 +14,17 @@ namespace VendingMachine
             this._coinsInserted = new List<Coin>();
             this._displayStack = new List<DisplayMessage>();
             this._commonServices = new CommonServices();
+            this._coinsRejected = new List<Coin>();
         }
         
         private List<DisplayMessage> _displayStack;
         private List<Coin> _coinsInserted;
+        private List<Coin> _coinsRejected;
         private ICommonServices _commonServices;
 
         public List<DisplayMessage> DisplayStack { get { return this._displayStack; } }
         public List<Coin> CoinsInserted { get { return this._coinsInserted; } }
+        public List<Coin> CoinsRejected { get { return this._coinsRejected; } }
         
         public decimal TotalInserted
         {
@@ -56,7 +59,7 @@ namespace VendingMachine
             }
             else
             {
-                this._coinsInserted.Add(coin);
+                if (coin.RejectCoin) { this._coinsRejected.Add(coin); } else { this._coinsInserted.Add(coin); }
             }
         }
 

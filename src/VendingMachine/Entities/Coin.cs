@@ -6,5 +6,6 @@ namespace VendingMachine.Entities
         public int Weight { get; set; }
         public string Name { get; set; }
         public decimal Denomination { get; set; }
+        public bool RejectCoin { get; set; }
     }
 }

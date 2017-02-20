@@ -11,7 +11,9 @@ Run tests:
 ---------
 
 In terminal navigate to VendingMachineKata/test/VendingMachine.Tests
+
 Restore packages/dependencies: "dotnet restore"
+
 Run tests: "dotnet test"
 
 
@@ -20,5 +22,7 @@ Run app:
 -------
 
 In terminal navigate to VendingMachineKata/src/VendingMachine
+
 Restore packages/dependencies: "dotnet restore"
+
 Run tests: "dotnet run"

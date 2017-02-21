@@ -56,7 +56,7 @@ namespace VendingMachine
             var coin = _commonServices.CalculateCoin(Size, Weight);
             if (coin == null)
             {
-                this._displayStack.Add(new DisplayMessage("This machine does not take washers and Canadian change"));
+                this._displayStack.Add(new DisplayMessage(" This machine does not take washers and Canadian change"));
             }
             else
             {
@@ -71,6 +71,24 @@ namespace VendingMachine
                     this._displayStack.Add(new DisplayMessage(" Amount: " + this.TotalInserted.ToString("c")));
                 }
             }
+        }
+
+        public bool TryPurchaseProduct(string SelectionCode)
+        {
+
+            var product = this.GetProducts().Single(x => x.SelectionCode == SelectionCode);
+            bool isValid = !(product.Price > this.TotalInserted);
+
+            if (!isValid)
+            {
+                this._displayStack.Add(new DisplayMessage(" Price: " + product.Price.ToString("c")));
+            }
+            else
+            {
+                this._displayStack.Add(new DisplayMessage(" THANK YOU!"));
+            }
+
+            return isValid;
         }
 
     }

@@ -12,11 +12,7 @@ namespace VendingMachine
         
         public static void Main(string[] args)
         {
-            Console.WriteLine("INSERT COIN: [P] Penny [N] Nickel [D] Dime [Q] Quarter [L] Looney [X] Exit");
-            
-            _lastDisplayUpdate = default(DateTime);
-            _session = new VendingSession();
-            UpdateDisplay();            
+           InitializeApp();
             string keyPressed = "";
 
             while (keyPressed != "X")
@@ -28,11 +24,27 @@ namespace VendingMachine
                     InsertCoin(keyPressed);
                     UpdateDisplay();
                 }
+
+                if (_session.GetProducts().Select(x => x.SelectionCode).Contains(keyPressed))
+                {
+                    bool isValid = _session.TryPurchaseProduct(keyPressed);
+                    UpdateDisplay();
+                    if (isValid) { InitializeApp(); }
+                }
                 
             }
 
             Console.WriteLine("Goodbye!");
 
+        }
+
+        private static void InitializeApp()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("INSERT COIN: [P] Penny [N] Nickel [D] Dime [Q] Quarter [L] Looney [X] Exit");
+            _lastDisplayUpdate = default(DateTime);
+            _session = new VendingSession();
+            UpdateDisplay(); 
         }
 
         private static void UpdateDisplay()

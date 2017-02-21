@@ -12,5 +12,6 @@ namespace VendingMachine
          List<Coin> CoinsRejected { get; }  
          decimal TotalInserted { get; }
          void InsertCoin(int Size, int Weight);
+         bool TryPurchaseProduct(string SelectionCode);
     }
 }

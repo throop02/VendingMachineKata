@@ -78,6 +78,38 @@ namespace Tests
 
         }
 
+        [Fact]
+        public void ProductIsVendedWithSufficientAmount()
+        {
+            IVendingSession vs = new VendingSession();
+            var product = vs.GetProducts().First();
+            
+            while (vs.TotalInserted < product.Price)
+            {
+                var coin = vs.GetCoins().Where(x => x.RejectCoin == false).OrderByDescending(x => x.Denomination).First();
+                vs.InsertCoin(coin.Size, coin.Weight);
+            }
+            
+            Assert.Equal(true, vs.TryPurchaseProduct(product.SelectionCode));
+
+            //Thank you is displayed to customer
+            Assert.Equal(" THANK YOU!", vs.DisplayStack.OrderByDescending(x => x.GeneratedDateTime).First().MessageText);
+
+        }
+
+        [Fact]
+        public void ProductIsNotVendedWithInsufficientAmount()
+        {
+            IVendingSession vs = new VendingSession();
+            var product = vs.GetProducts().Where(x => x.Price > 0).First();
+            
+            Assert.Equal(false, vs.TryPurchaseProduct(product.SelectionCode));
+
+            //Price is displayed to the customer
+            Assert.Equal(" Price: " + product.Price.ToString("c"), vs.DisplayStack.OrderByDescending(x => x.GeneratedDateTime).First().MessageText);
+
+        }
+
 
     }
 

@@ -61,6 +61,10 @@ namespace Tests
 
             //Penny got added to reject collection
             Assert.Equal(penny.Denomination, vs.CoinsRejected.Sum(x => x.Denomination));
+
+            //We displayed a rejection message
+            Assert.Equal(" Coin sent to reject bin..", vs.DisplayStack.OrderByDescending(x => x.GeneratedDateTime).First().MessageText);
+
         }
 
         [Fact]

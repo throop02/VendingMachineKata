@@ -61,7 +61,10 @@ namespace VendingMachine
             else
             {
                 if (coin.RejectCoin)
-                { this._coinsRejected.Add(coin); }
+                { 
+                    this._coinsRejected.Add(coin);
+                    this._displayStack.Add(new DisplayMessage(" Coin sent to reject bin.."));
+                }
                 else 
                 { 
                     this._coinsInserted.Add(coin);

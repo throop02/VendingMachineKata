@@ -110,6 +110,24 @@ namespace Tests
 
         }
 
+        [Fact]
+        public void CanCalculateChange()
+        {
+            
+            IVendingSession vs = new VendingSession();
+            var product = vs.GetProducts().First();
+            
+            //Insert excess coins
+            while (vs.TotalInserted <= product.Price)
+            {
+                var coin = vs.GetCoins().Where(x => x.RejectCoin == false).OrderByDescending(x => x.Denomination).First();
+                vs.InsertCoin(coin.Size, coin.Weight);
+            }
+
+            Assert.Equal((vs.TotalInserted - product.Price), vs.CalculateChange(product.Price));
+
+        }
+
 
     }
 

@@ -13,5 +13,6 @@ namespace VendingMachine
          decimal TotalInserted { get; }
          void InsertCoin(int Size, int Weight);
          bool TryPurchaseProduct(string SelectionCode);
+         decimal CalculateChange(decimal ProductPrice);
     }
 }

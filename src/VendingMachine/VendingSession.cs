@@ -91,5 +91,10 @@ namespace VendingMachine
             return isValid;
         }
 
+        public decimal CalculateChange(decimal ProductPrice)
+        {
+            return (this.TotalInserted - ProductPrice);
+        }
+
     }
 }

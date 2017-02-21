@@ -8,7 +8,9 @@ namespace VendingMachine
          List<Product> GetProducts();
          List<Coin> GetCoins();
          List<DisplayMessage> DisplayStack { get; }
-         List<Coin> CoinsInserted { get; }    
+         List<Coin> CoinsInserted { get; }  
+         List<Coin> CoinsRejected { get; }  
          decimal TotalInserted { get; }
+         void InsertCoin(int Size, int Weight);
     }
 }

@@ -15,6 +15,7 @@ namespace VendingMachine
             this._displayStack = new List<DisplayMessage>();
             this._commonServices = new CommonServices();
             this._coinsRejected = new List<Coin>();
+            this.DisplayStack.Add(new DisplayMessage(_commonServices.BuildProductSelectionList()));
         }
         
         private List<DisplayMessage> _displayStack;
@@ -59,7 +60,13 @@ namespace VendingMachine
             }
             else
             {
-                if (coin.RejectCoin) { this._coinsRejected.Add(coin); } else { this._coinsInserted.Add(coin); }
+                if (coin.RejectCoin)
+                { this._coinsRejected.Add(coin); }
+                else 
+                { 
+                    this._coinsInserted.Add(coin);
+                    this._displayStack.Add(new DisplayMessage(" Amount: " + this.TotalInserted.ToString("c")));
+                }
             }
         }
 

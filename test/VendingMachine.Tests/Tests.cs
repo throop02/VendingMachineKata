@@ -37,7 +37,7 @@ namespace Tests
         [Fact]
         public void WhenValidCoinsAreInsertedTotalAmountIncreases()
         {
-            var vs = new VendingSession();
+            IVendingSession vs = new VendingSession();
             var coins = vs.GetCoins().Where(x => x.RejectCoin == false);
 
             foreach(Coin c in coins)
@@ -52,7 +52,7 @@ namespace Tests
         [Fact]
         public void PennyIsRejected()
         {
-            var vs = new VendingSession();
+            IVendingSession vs = new VendingSession();
             var penny = vs.GetCoins().Single(x => x.Name == "Penny" && x.RejectCoin == true);
             vs.InsertCoin(penny.Size, penny.Weight);
 
@@ -62,6 +62,18 @@ namespace Tests
             //Penny got added to reject collection
             Assert.Equal(penny.Denomination, vs.CoinsRejected.Sum(x => x.Denomination));
         }
+
+        [Fact]
+        public void DisplayAmountIsUpdatedWhenValidCoinIsInserted()
+        {
+            IVendingSession vs = new VendingSession();
+            var coin = vs.GetCoins().First(x => x.RejectCoin == false);
+            vs.InsertCoin(coin.Size, coin.Weight);
+
+            Assert.Equal((" Amount: " + coin.Denomination.ToString("c")), vs.DisplayStack.OrderByDescending(x => x.GeneratedDateTime).First().MessageText);
+
+        }
+
 
     }
 

@@ -5,17 +5,17 @@ namespace VendingMachine.Entities
     public class DisplayMessage
     {
 
-        private DateTime _GeneratedDateTime;
+        private DateTime _generatedDateTime;
         private string _MessageText;
 
         public DisplayMessage(string MessageText)
         {
             this._MessageText = MessageText;
-            this._GeneratedDateTime = DateTime.Now;
+            this._generatedDateTime = DateTime.Now;
         }
 
         public string MessageText { get { return this._MessageText; } }
-        public DateTime GeneratedDateTime { get { return this.GeneratedDateTime; } }
+        public DateTime GeneratedDateTime { get { return this._generatedDateTime; } }
 
     }
 }

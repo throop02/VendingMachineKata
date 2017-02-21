@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/bin/Debug/netcoreapp1.1/src.dll",
+            "program": "${workspaceRoot}/src/VendingMachine/bin/Debug/netcoreapp1.1/VendingMachine.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "externalConsole": false,

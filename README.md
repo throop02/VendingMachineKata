@@ -16,6 +16,8 @@ Restore packages/dependencies: "dotnet restore"
 
 Run tests: "dotnet test"
 
+![Alt text](http://www.evanvaughan.com/wp-content/uploads/2017/02/test.png "Tests")
+
 
 
 Run app:
@@ -26,3 +28,5 @@ In terminal navigate to VendingMachineKata/src/VendingMachine
 Restore packages/dependencies: "dotnet restore"
 
 Run tests: "dotnet run"
+
+![Alt text](http://www.evanvaughan.com/wp-content/uploads/2017/02/run.png "Run")
